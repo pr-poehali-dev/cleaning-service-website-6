@@ -184,60 +184,77 @@ export default function Index({ user, onUserChange }: IndexProps) {
         </div>
       </header>
 
-      <section className="pt-32 pb-20 bg-gradient-to-br from-primary/5 via-background to-primary/10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <Badge className="mb-4" variant="secondary">
+      <section className="relative h-screen overflow-hidden">
+        <div className="absolute inset-0 w-full h-full">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="https://cdn.coverr.co/videos/coverr-professional-dry-cleaning-service-8753/1080p.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
+        </div>
+
+        <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
+          <div className="max-w-3xl mx-auto text-center animate-fade-in text-white">
+            <Badge className="mb-4 bg-white/20 backdrop-blur-sm text-white border-white/30">
               <Icon name="Award" size={14} className="mr-1" />
               Экспресс-чистка за 24 часа
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-2xl">
               Доверьте чистоту профессионалам!
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl md:text-2xl mb-8 drop-shadow-lg">
               Бережная обработка деликатных тканей, современное оборудование и экологичные средства
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="gap-2" onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90 shadow-2xl" onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}>
                 <Icon name="CalendarCheck" size={20} />
                 Заказать услугу
               </Button>
-              <Button size="lg" variant="outline" className="gap-2">
+              <Button size="lg" variant="outline" className="gap-2 bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20">
                 <Icon name="MessageCircle" size={20} />
                 Связаться с нами
               </Button>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6 mt-16">
-              <Card className="border-2 hover:border-primary transition-colors">
+              <Card className="border-2 hover:border-primary transition-colors bg-white/10 backdrop-blur-md border-white/20">
                 <CardHeader className="text-center">
-                  <Icon name="Clock" size={40} className="mx-auto mb-2 text-primary" />
-                  <CardTitle className="text-lg">Быстро</CardTitle>
+                  <Icon name="Clock" size={40} className="mx-auto mb-2 text-white" />
+                  <CardTitle className="text-lg text-white">Быстро</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">Экспресс-чистка от 24 часов</p>
+                  <p className="text-sm text-white/80">Экспресс-чистка от 24 часов</p>
                 </CardContent>
               </Card>
-              <Card className="border-2 hover:border-primary transition-colors">
+              <Card className="border-2 hover:border-primary transition-colors bg-white/10 backdrop-blur-md border-white/20">
                 <CardHeader className="text-center">
-                  <Icon name="Shield" size={40} className="mx-auto mb-2 text-primary" />
-                  <CardTitle className="text-lg">Безопасно</CardTitle>
+                  <Icon name="Shield" size={40} className="mx-auto mb-2 text-white" />
+                  <CardTitle className="text-lg text-white">Безопасно</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">Экологичные средства</p>
+                  <p className="text-sm text-white/80">Экологичные средства</p>
                 </CardContent>
               </Card>
-              <Card className="border-2 hover:border-primary transition-colors">
+              <Card className="border-2 hover:border-primary transition-colors bg-white/10 backdrop-blur-md border-white/20">
                 <CardHeader className="text-center">
-                  <Icon name="Star" size={40} className="mx-auto mb-2 text-primary" />
-                  <CardTitle className="text-lg">Качественно</CardTitle>
+                  <Icon name="Star" size={40} className="mx-auto mb-2 text-white" />
+                  <CardTitle className="text-lg text-white">Качественно</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">15 лет опыта работы</p>
+                  <p className="text-sm text-white/80">15 лет опыта работы</p>
                 </CardContent>
               </Card>
             </div>
           </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <Icon name="ChevronDown" size={32} className="text-white/70" />
         </div>
       </section>
 
