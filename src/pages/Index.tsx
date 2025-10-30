@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import Icon from '@/components/ui/icon';
+import AuthDialog from '@/components/AuthDialog';
 
 const services = [
   {
@@ -108,7 +110,14 @@ const reviews = [
   }
 ];
 
-export default function Index() {
+interface IndexProps {
+  user: any;
+  onUserChange: (user: any) => void;
+}
+
+export default function Index({ user, onUserChange }: IndexProps) {
+  const navigate = useNavigate();
+  const [authDialogOpen, setAuthDialogOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState<number[]>([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -118,6 +127,11 @@ export default function Index() {
     time: '',
     comment: ''
   });
+
+  const handleAuthSuccess = (userData: any) => {
+    onUserChange(userData);
+    navigate('/dashboard');
+  };
 
   const toggleService = (serviceId: number) => {
     setSelectedServices(prev =>
@@ -154,10 +168,19 @@ export default function Index() {
             <a href="#reviews" className="hover:text-primary transition-colors">Отзывы</a>
             <a href="#contacts" className="hover:text-primary transition-colors">Контакты</a>
           </nav>
-          <Button>
-            <Icon name="Phone" size={18} className="mr-2" />
-            +7 (495) 123-45-67
-          </Button>
+          <div className="flex items-center gap-2">
+            {user ? (
+              <Button onClick={() => navigate('/dashboard')}>
+                <Icon name="User" size={18} className="mr-2" />
+                Личный кабинет
+              </Button>
+            ) : (
+              <Button onClick={() => setAuthDialogOpen(true)}>
+                <Icon name="LogIn" size={18} className="mr-2" />
+                Войти
+              </Button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -569,6 +592,12 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      <AuthDialog 
+        open={authDialogOpen} 
+        onOpenChange={setAuthDialogOpen}
+        onSuccess={handleAuthSuccess}
+      />
     </div>
   );
 }
